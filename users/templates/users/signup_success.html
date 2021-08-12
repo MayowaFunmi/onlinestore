@@ -1,0 +1,12 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Sign Up Success{% endblock %}
+
+{% block content %}
+    <p>
+        Sign Up Successful!!!<br>
+        Please visit our contact centre and provide your username and email to get your login code<br>
+        Or, Proceed to <a href="{% url 'users:admin_login' %}">Login</a> if you already have your details
+    </p>
+{% endblock content %}

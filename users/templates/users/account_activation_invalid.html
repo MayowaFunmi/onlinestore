@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="form-group">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div id="danger">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'success' %}
+                        <div id="success" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    <h2>not sent</h2>
+</body>
+</html>

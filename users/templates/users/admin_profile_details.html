@@ -1,0 +1,32 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Profile Details{% endblock %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+    <div>
+        <h2>Welcome, {{ user.last_name }} {{ user.first_name }},</h2>
+        <p>You are now an admin of this shop</p>
+        <h2>Here are your personal profile details:</h2>
+        <div>
+            <p>
+                <strong>
+                    User: {{ user }}<br>
+                    User id: {{ code_number }}<br>
+                    Phone Number: {{ phone_number }}<br>
+                    Email: {{ email }}<br>
+                    Gender: {{ gender }}<br>
+                    Address: {{ address }}<br>
+                    Date Of Birth: {{ date_of_birth }}<br>
+                    Religion: {{ religion }}<br>
+                    About You: {{ about_me }}<br>
+                    Photo: {{ photo_url }}<br>
+                    ID Card: {{ id_card_url }}<br>
+                </strong>
+            </p>
+        </div>
+
+    </div>
+{% endblock %}

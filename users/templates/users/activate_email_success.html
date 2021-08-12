@@ -1,0 +1,10 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Account Activation Email Redirect{% endblock %}
+
+{% block content %}
+    <div>
+        <h3>Your Account Activation Is Successful</h3>
+        <p>Click <a href="{% url 'users:get_admin_code' %}">Here</a> To get your Admin Reference Code</p>
+    </div>
+{% endblock %}

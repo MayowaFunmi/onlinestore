@@ -1,0 +1,88 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Admin User Sign Up{% endblock %}
+
+{% block style %}
+    <style>
+        #text {
+            background: green;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            border-radius: 20px;
+            font-size: 30px;
+            margin: 15px;
+        }
+
+        div #label {
+            font-style: italic;
+            font-size: 20px;
+            margin-top: 15px;
+            text-align: justify;
+            text-transform: capitalize;
+        }
+
+        input, select {
+            padding: 10px 10px;
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid orange;
+            box-sizing: border-box;
+        }
+        div #danger {
+            background-color: #f08981;
+            color: white;
+            text-align: center;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        div #success {
+            background-color: #91e681;
+            color: white;
+            text-align: center;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+{% endblock style %}
+
+{% block content %}
+    <h2 id="text">Sign Up Form (For Admin User Registration)</h2>
+    <form method="POST">
+        <div id="form-group">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div id="danger">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'success' %}
+                        <div id="success" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% csrf_token %}
+        {% for field in form %}
+            <div id="label">
+                {{ field.label }}:
+            </div>
+            <div id="field">
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button class="btn btn-success" type="submit">
+            Sign Up
+        </button>
+    </form>
+{% endblock %}
