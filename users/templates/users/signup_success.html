@@ -1,12 +1,26 @@
 {% extends 'shop/base.html' %}
-{% load static %}
 
-{% block title %}Sign Up Success{% endblock %}
+{% block title %}Sign Up Successful{% endblock title %}
 
 {% block content %}
-    <p>
-        Sign Up Successful!!!<br>
-        Please visit our contact centre and provide your username and email to get your login code<br>
-        Or, Proceed to <a href="{% url 'users:admin_login' %}">Login</a> if you already have your details
-    </p>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <h2>Thank You, {{ first_name }} {{ last_name }}.<br>You Have Successfully Registered</h2>
+                <div>
+                    Below Are Your Registration Details:
+                    <p>
+                        Username: {{ username }}<br>
+                        Email: {{ email }}<br>
+                        First Name: {{ first_name }}<br>
+                        Surname: {{ last_name }}<br>
+                    </p>
+                </div>
+                <button class="btn btn-primary">
+                    Proceed To <a href="{% url 'users:login' %}">Login</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}

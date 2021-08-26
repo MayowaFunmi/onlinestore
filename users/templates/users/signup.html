@@ -1,0 +1,63 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <h2>SignUp / Registration Form:</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {{ form.username }}
+                    </div>
+                    <br>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {{ form.first_name }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {{ form.last_name }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-at"></i>
+                        </span>
+                        {{ form.email }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        {{ form.password1 }}
+                    </div>
+                    <br>
+
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        {{ form.password2 }}
+                    </div>
+                    <br>
+                    <button class="btn btn-success" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

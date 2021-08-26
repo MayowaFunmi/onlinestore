@@ -6,6 +6,10 @@ var showTime = function() {
     var minute = myDate.getMinutes();
     var second = myDate.getSeconds();
 
+    var year = myDate.getFullYear();
+    var month = myDate.getMonth()+1;
+    var day = myDate.getDate();
+
     if (hour > 11) {
         meridian = "PM"
     }
@@ -22,7 +26,14 @@ var showTime = function() {
         second = "0" + second
     };
 
-    currentTime = hour + ":" + minute + ":" + second + meridian;
+    if (month < 10) {
+        month = '0' + month
+    };
+
+    if (day < 10) {
+        day = '0'+day
+    }
+    currentTime =day + '-' + month + '-' + year + ' ' + hour + ":" + minute + ":" + second + meridian;
     disp.innerHTML = currentTime;
 
 };
