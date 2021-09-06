@@ -6,12 +6,17 @@
 </head>
 <body onload="payWithPaystack()">
     <div id="success">
+
     </div>
+
     <div id="output">
 
     </div>
-    <p>Click <a href="{% url 'orders:render_pdf' order.id %}">Here</a> to print receipt of your purchase</p>
-    <p id="home">Go Back To Shop <a href="{% url 'shop:product_list' %}">Homepage</a></p>
+
+    <div id="display_info">
+        <p>Click <a href="{% url 'orders:render_pdf' order.id %}">Here</a> to print receipt of your purchase</p>
+        <p id="home">Go Back To Shop <a href="{% url 'shop:product_list' %}">Homepage</a></p>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -19,14 +24,16 @@
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script>
         window.onload=function(){
+            $("#display_info").hide();
             payWithPaystack();
         };
 
         function payWithPaystack(){
+            var a = '{{ cart.get_total_price }}';
             var handler = PaystackPop.setup({
                 key: 'pk_test_ce8979497f703eb955ab5ceb19fc54cdcb615e0d',
                 email:'{{email}}',
-                amount:'{{ cart.get_total_price }}' * 100,
+                amount: parseInt(a) * 100,
                 currency: "NGN",
                 metadata: {
                     custom_fields: [
@@ -41,14 +48,18 @@
 
                 callback: function(response){
                     var ref = response.reference;
-                    var order_id = {{ order.id }}
-                    $('#success').html("<h2>Success. Transaction reference is : </h2>" + ref + "<h2>and your order id is </h2>" + order_id);
+                    var order_random_id = '{{ order.order_id }}'
+                    var order_id = '{{ order.id }}'
+                    //console.log(order_id)
+                    $('#success').html("<h2>Success. Transaction reference is : </h2>" + ref + "<h2>and your order id is </h2>" + order_random_id);
+                    $("#display_info").show();
                     // $('div#home').show();
                     $.ajax({
-                        type: "POST",
-                        url: "{% url 'orders:ajax_payment' %}",
+                        method: "GET",
+                        url: "{% url 'orders:pay_with_paystack' %}",
                         data: {
-                          reference: ref,
+                            'id': order_id,
+                          'reference': ref,
                         },
                         dataType: "json",
 

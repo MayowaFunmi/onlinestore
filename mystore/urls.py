@@ -17,9 +17,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from shop import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.product_list, name='product_list'),
     path('cart/', include('cart.urls', namespace='cart')),
     path('shop/', include('shop.urls', namespace='shop')),
     path('orders/', include('orders.urls', namespace='orders')),
