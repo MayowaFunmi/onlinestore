@@ -1,22 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PAYMENT WITH PAYSTACK</title>
-</head>
-<body onload="payWithPaystack()">
-    <div id="success">
+{% extends "shop/base.html" %}
+{% load static %}
 
+{% block title %}Payment With Paystack{% endblock %}
+
+{% block content %}
+    <div class='container' onload="payWithPaystack()">
+        <div class='row justify-content-md-center'>
+            <div class='col-md-auto'>
+                <div id="output">
+
+                </div>
+
+                <div id="success">
+
+                </div>
+
+                <div id="display_info">
+                    <p>Click <a href="{% url 'orders:render_pdf' order.id %}">Here</a> to print receipt of your purchase</p>
+                    <p id="home">Go Back To Shop <a href="{% url 'shop:product_list' %}">Homepage</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="output">
 
-    </div>
 
-    <div id="display_info">
-        <p>Click <a href="{% url 'orders:render_pdf' order.id %}">Here</a> to print receipt of your purchase</p>
-        <p id="home">Go Back To Shop <a href="{% url 'shop:product_list' %}">Homepage</a></p>
-    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -51,8 +59,7 @@
                     var order_random_id = '{{ order.order_id }}'
                     var order_id = '{{ order.id }}'
                     //console.log(order_id)
-                    $('#success').html("<h2>Success. Transaction reference is : </h2>" + ref + "<h2>and your order id is </h2>" + order_random_id);
-                    $("#display_info").show();
+                    
                     // $('div#home').show();
                     $.ajax({
                         method: "GET",
@@ -64,7 +71,14 @@
                         dataType: "json",
 
                         success: function (data) {
-                            $('#output').html(data.message)
+                            if (data.message == "Your Payment was successfully received") {
+                                $('#output').html(data.message)
+                                $('#success').html(`<p>Transaction reference is : <h2>${ref}</h2> and your order id is <h2>${order_random_id}</h2></p>`);
+                                $("#display_info").show();
+                            } else if (data.message == "Your Payment Failed!!!") {
+                                $('#output').html(data.message)
+                                $("#success").html(`<a href="{% url 'orders:order_create' %}" class="button">Checkout</a>`)
+                            }
                         },
                     });
                 },
@@ -77,5 +91,4 @@
             handler.openIframe();
         }
     </script>
-</body>
-</html>
+{% endblock content %}

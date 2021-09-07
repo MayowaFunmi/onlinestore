@@ -60,7 +60,7 @@ class Pdf(View):
 
     def get(self, request, id):
         cart = Cart(request)
-        order_item = get_object_or_404(OrderItem, id=id)
+        order_item = get_object_or_404(Order, id=id)
         today = timezone.now()
         # clear the cart
         cart.clear()
