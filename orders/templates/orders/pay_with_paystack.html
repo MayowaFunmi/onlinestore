@@ -16,7 +16,7 @@
                 </div>
 
                 <div id="display_info">
-                    <p>Click <a href="{% url 'orders:render_pdf' order.id %}">Here</a> to print receipt of your purchase</p>
+                    <p>Click <a href="{% url 'orders:render_pdf' order.id %}" target="_blank">Here</a> to print receipt of your purchase</p>
                     <p id="home">Go Back To Shop <a href="{% url 'shop:product_list' %}">Homepage</a></p>
                 </div>
             </div>
